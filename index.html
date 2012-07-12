@@ -1,0 +1,27 @@
+<html>
+<head>
+<script type="text/javascript" src="http://openlayers.org/api/OpenLayers.js"></script>
+<!--script type="text/javascript" src="OpenLayers.js"></script-->
+<script type="text/javascript">
+
+var map1;
+var map2;
+var map3;
+function init() {
+	map1 = new OpenLayers.Map('mapDiv1');
+	var wms1 = new OpenLayers.Layer.WMS(
+		"OpenLayers WMS",
+		"http://labs.metacarta.com/wms/vmap0",
+		{layers: 'basic,ctylabel,depthcontour,stateboundary'}
+	);
+
+	map1.addLayers([wms1]);
+	map1.zoomToMaxExtent();
+}
+
+</script>
+</head>
+
+<body onload="init()">
+	<div id="mapDiv1" style="width: 600px; height: 300px"></div>
+</body>
