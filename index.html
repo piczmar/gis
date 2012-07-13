@@ -8,6 +8,23 @@
     .olControlOverviewMapElement {
         background:#00ff00 !important;
     }
+
+.olControlZoomInItemInactive {
+    background:url(http://dev.openlayers.org/releases/OpenLayers-2.8/img/zoom-plus-mini.png) no-repeat;
+    border:2px solid #232323;
+    float:left;
+    height:18px;
+    margin-right:5px;
+    width:18px;
+}
+.olControlZoomOutItemInactive {
+    background:url(http://dev.openlayers.org/releases/OpenLayers-2.8/img/zoom-minus-mini.png) no-repeat;
+    border:2px solid #232323;
+    float:left;
+    height:18px;
+    margin-right:5px;
+    width:18px;
+}
 </style>
 <script type="text/javascript" src="http://openlayers.org/api/OpenLayers.js"></script>
 <!--script type="text/javascript" src="OpenLayers.js"></script-->
@@ -41,6 +58,22 @@ function init() {
                     {layers: 'country_01'})]
                 }		
 		)); 
+	var external_control = new OpenLayers.Control.MousePosition(
+		{div: document.getElementById('external_control') }
+	);
+	map1.addControl(external_control);
+
+
+	var control_zoom_in = new OpenLayers.Control.ZoomIn();
+    	var control_zoom_out = new OpenLayers.Control.ZoomOut();
+	map1.addControl(control_zoom_in);
+    	map1.addControl(control_zoom_out);
+    	var external_panel = new OpenLayers.Control.Panel(
+		{div: document.getElementById('panel') }
+	);
+	external_panel.addControls([control_zoom_in, control_zoom_out]);
+    	map1.addControl(external_panel);
+
 }
 
 </script>
@@ -48,4 +81,8 @@ function init() {
 
 <body onload="init()">
 	<div id="mapDiv1" style="width: 600px; height: 300px"></div>
+
+	<div id="external_control"></div>
+
+	<div id="panel"></div>
 </body>
