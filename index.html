@@ -1,14 +1,30 @@
 <html>
 <head>
+<style>
+    .olControlOverviewMap {
+        background:#ff0000;
+        width:200px;
+    }
+    .olControlOverviewMapElement {
+        background:#00ff00 !important;
+    }
+</style>
 <script type="text/javascript" src="http://openlayers.org/api/OpenLayers.js"></script>
 <!--script type="text/javascript" src="OpenLayers.js"></script-->
 <script type="text/javascript">
+
 
 var map1;
 var map2;
 var map3;
 function init() {
-	map1 = new OpenLayers.Map('mapDiv1');
+	map_controls = [
+		new OpenLayers.Control.LayerSwitcher(),
+		new OpenLayers.Control.PanZoomBar(),
+		new OpenLayers.Control.KeyboardDefaults(),
+		new OpenLayers.Control.NavToolbar()
+		];
+	map1 = new OpenLayers.Map('mapDiv1',{ controls: map_controls });
 	var wms1 = new OpenLayers.Layer.WMS(
 		"OpenLayers WMS",
 		"http://labs.metacarta.com/wms/vmap0",
@@ -17,6 +33,14 @@ function init() {
 
 	map1.addLayers([wms1]);
 	map1.zoomToMaxExtent();
+
+	map1.addControl(new OpenLayers.Control.OverviewMap(
+		 {autoPan:true,
+                layers: [new OpenLayers.Layer.WMS("OverviewMap",
+                    "http://labs.metacarta.com/wms/vmap0", 
+                    {layers: 'country_01'})]
+                }		
+		)); 
 }
 
 </script>
