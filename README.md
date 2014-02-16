@@ -13,3 +13,6 @@ http://openweathermap.org/example-openlayer
 http://openlayers.org/dev/examples/fullScreen.html
 http://stackoverflow.com/questions/1237187/openlayers-vs-google-maps
 
+nice feature read/write example:
+http://openlayers.org/dev/examples/vector-formats.html
+
